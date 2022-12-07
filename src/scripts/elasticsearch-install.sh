@@ -814,16 +814,19 @@ configure_transport_tls()
 
         # Use CA to generate certs
         log "[configure_transport_tls] save Transport CA blob to file"
+        log "$TRANSPORT_CACERT"
+        base64 -d <<< "$TRANSPORT_CACERT" > /etc/elasticsearch/ssl/amr.p12
         echo ${TRANSPORT_CACERT} | base64 -d | tee $TRANSPORT_CACERT_PATH
 
         # Check the cert is a CA
         echo "$TRANSPORT_CACERT_PASSWORD" | openssl pkcs12 -in $TRANSPORT_CACERT_PATH -clcerts -nokeys -passin stdin | openssl x509 -text -noout | grep "CA:TRUE"
                 
-        
+        openssl pkcs12 -in
         if [[ $? -ne 0 ]]; then
             log "[configure_transport_tls] Transport CA blob is not a Certificate Authority (CA)"
             log "TRANSPORT_CACERT_PASSWORD $TRANSPORT_CACERT_PASSWORD"
             log "TRANSPORT_CACERT_PATH $TRANSPORT_CACERT_PATH"
+            log "$TRANSPORT_CACERT"
             log "AMR"
             exit 12
         fi
