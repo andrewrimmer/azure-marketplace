@@ -823,9 +823,9 @@ configure_transport_tls()
         if [[ $? -ne 0 ]]; then
             log "[configure_transport_tls] Transport CA blob is not a Certificate Authority (CA)"
             log "TRANSPORT_CACERT_PASSWORD $TRANSPORT_CACERT_PASSWORD"
-            log "TRANSPORT_CACERT_PATH $TRANSPORT_CACERT_PASSWORD"
-            log "Carry on regardless AMR"
-            #exit 12
+            log "TRANSPORT_CACERT_PATH $TRANSPORT_CACERT_PATH"
+            log "AMR"
+            exit 12
         fi
 
         # Generate certs with certutil
