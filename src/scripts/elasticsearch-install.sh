@@ -817,11 +817,15 @@ configure_transport_tls()
         echo ${TRANSPORT_CACERT} | base64 -d | tee $TRANSPORT_CACERT_PATH
 
         # Check the cert is a CA
-        echo "$TRANSPORT_CACERT_PASSWORD" | openssl pkcs12 -in $TRANSPORT_CACERT_PATH -clcerts -nokeys -passin stdin \
-          | openssl x509 -text -noout | grep "CA:TRUE"
+        echo "$TRANSPORT_CACERT_PASSWORD" | openssl pkcs12 -in $TRANSPORT_CACERT_PATH -clcerts -nokeys -passin stdin | openssl x509 -text -noout | grep "CA:TRUE"
+                
+        
         if [[ $? -ne 0 ]]; then
             log "[configure_transport_tls] Transport CA blob is not a Certificate Authority (CA)"
-            exit 12
+            log "TRANSPORT_CACERT_PASSWORD $TRANSPORT_CACERT_PASSWORD"
+            log "TRANSPORT_CACERT_PATH $TRANSPORT_CACERT_PASSWORD"
+            log "Carry on regardless AMR"
+            #exit 12
         fi
 
         # Generate certs with certutil
