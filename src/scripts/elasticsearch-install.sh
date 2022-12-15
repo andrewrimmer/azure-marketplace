@@ -740,11 +740,13 @@ configure_http_tls()
         # Use HTTP cert if supplied, otherwise generate one
         if [[ -n "${HTTP_CERT}" ]]; then
           log "[configure_http_tls] save HTTP cert blob to file"
-          echo ${HTTP_CERT} | base64 -d | tee $HTTP_CERT_PATH
+          # echo ${HTTP_CERT} | base64 -d | tee $HTTP_CERT_PATH
+          base64 -d <<< "$HTTP_CERT" > $HTTP_CERT_PATH
         else
           # Use the CA cert to generate certs if supplied
           log "[configure_http_tls] save HTTP CA cert blob to file"
-          echo ${HTTP_CACERT} | base64 -d | tee $HTTP_CACERT_PATH
+          # echo ${HTTP_CACERT} | base64 -d | tee $HTTP_CACERT_PATH
+          base64 -d <<< "$HTTP_CACERT" > $HTTP_CACERT_PATH
 
           # Check the cert is a CA
           echo "$HTTP_CACERT_PASSWORD" | openssl pkcs12 -in $HTTP_CACERT_PATH -clcerts -nokeys -passin stdin \
@@ -814,9 +816,9 @@ configure_transport_tls()
 
         # Use CA to generate certs
         log "[configure_transport_tls] save Transport CA blob to file"
-        echo ${TRANSPORT_CACERT} | base64 -d | tee $TRANSPORT_CACERT_PATH
-
-        # Check the cert is a CA
+        log "$TRANSPORT_CACERT"
+        base64 -d <<< "$TRANSPORT_CACERT" > $TRANSPORT_CACERT_PATH
+         # Check the cert is a CA
         echo "$TRANSPORT_CACERT_PASSWORD" | openssl pkcs12 -in $TRANSPORT_CACERT_PATH -clcerts -nokeys -passin stdin \
           | openssl x509 -text -noout | grep "CA:TRUE"
         if [[ $? -ne 0 ]]; then
