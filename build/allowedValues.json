@@ -104,6 +104,8 @@
     ["Standard_A4m_v2", 8, "Standard", false],
     ["Standard_A8m_v2", 16, "Standard", false],
 
+    ["Standard_B2ms", 2, "Standard", false],
+
     ["Standard_D1_v2", 2, "Standard", false],
     ["Standard_D2_v2", 4, "Standard", false],
     ["Standard_D3_v2", 8, "Standard", false],

@@ -221,7 +221,7 @@
     },
     "vmSizeKibana": {
       "type": "string",
-      "defaultValue": "Standard_A2_v2",
+      "defaultValue": "Standard_B2ms",
       "allowedValues": [
         "Standard_A2_v2",
         "Standard_A4_v2",
@@ -229,6 +229,7 @@
         "Standard_A2m_v2",
         "Standard_A4m_v2",
         "Standard_A8m_v2",
+        "Standard_B2ms",
         "Standard_D1_v2",
         "Standard_D2_v2",
         "Standard_D3_v2",
@@ -397,7 +398,7 @@
     },
     "vmSizeLogstash": {
       "type": "string",
-      "defaultValue": "Standard_DS1_v2",
+      "defaultValue": "Standard_B2ms",
       "allowedValues": [
         "Standard_A1_v2",
         "Standard_A2_v2",
@@ -406,6 +407,7 @@
         "Standard_A2m_v2",
         "Standard_A4m_v2",
         "Standard_A8m_v2",
+        "Standard_B2ms",
         "Standard_D1_v2",
         "Standard_D2_v2",
         "Standard_D3_v2",
@@ -597,7 +599,7 @@
     },
     "vmSizeDataNodes": {
       "type": "string",
-      "defaultValue": "Standard_DS1_v2",
+      "defaultValue": "Standard_B2ms",
       "allowedValues": [
         "Standard_A1_v2",
         "Standard_A2_v2",
@@ -606,6 +608,7 @@
         "Standard_A2m_v2",
         "Standard_A4m_v2",
         "Standard_A8m_v2",
+        "Standard_B2ms",
         "Standard_D1_v2",
         "Standard_D2_v2",
         "Standard_D3_v2",
@@ -793,7 +796,7 @@
     },
     "vmSizeMasterNodes": {
       "type": "string",
-      "defaultValue": "Standard_DS1_v2",
+      "defaultValue": "Standard_B2ms",
       "allowedValues": [
         "Standard_A1_v2",
         "Standard_A2_v2",
@@ -802,6 +805,7 @@
         "Standard_A2m_v2",
         "Standard_A4m_v2",
         "Standard_A8m_v2",
+        "Standard_B2ms",
         "Standard_D1_v2",
         "Standard_D2_v2",
         "Standard_D3_v2",
@@ -939,7 +943,7 @@
     },
     "vmSizeClientNodes": {
       "type": "string",
-      "defaultValue": "Standard_DS1_v2",
+      "defaultValue": "Standard_B2ms",
       "allowedValues": [
         "Standard_A1_v2",
         "Standard_A2_v2",
@@ -948,6 +952,7 @@
         "Standard_A2m_v2",
         "Standard_A4m_v2",
         "Standard_A8m_v2",
+        "Standard_B2ms",
         "Standard_D1_v2",
         "Standard_D2_v2",
         "Standard_D3_v2",
@@ -1371,6 +1376,10 @@
       },
       "Standard_A8m_v2": {
         "dataDisks": 16,
+        "storageAccountType": "Standard_LRS"
+      },
+      "Standard_B2ms": {
+        "dataDisks": 2,
         "storageAccountType": "Standard_LRS"
       },
       "Standard_D1_v2": {
