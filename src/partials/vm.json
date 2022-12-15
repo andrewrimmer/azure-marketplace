@@ -40,6 +40,7 @@
     }
   },
   "variables": {
+    "availabilityZone": "[add(parameters('index'),1)]",
     "namespace": "[parameters('vm').namespace]",
     "computername": "[concat(parameters('vm').namespace, parameters('index'))]",
     "password_osProfile": {
@@ -128,8 +129,11 @@
         "publicIPAllocationMethod": "Static",
         "dnsSettings": {
           "domainNameLabel": "[concat(variables('namespace'), parameters('index'), uniqueString(resourceGroup().id, deployment().name))]"
-        }
-      }
+        }        
+      },
+      "zones": [
+        "[variables('availabilityZone')]"
+      ]
     },
     {
       "apiVersion": "2019-04-01",
@@ -183,6 +187,9 @@
           ]
         }
       },
+      "zones": [
+        "[variables('availabilityZone')]"
+      ],
       "resources": [
         {
           "type": "Microsoft.Compute/virtualMachines/extensions",
