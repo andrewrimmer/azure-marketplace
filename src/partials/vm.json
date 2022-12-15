@@ -14,6 +14,12 @@
         "description": "the outer loop index"
       }
     },
+    "availabilitySet": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the availability set"
+      }
+    },
     "dataDisks": {
       "type": "object",
       "defaultValue": {
@@ -123,7 +129,7 @@
         "publicIPAllocationMethod": "Static",
         "dnsSettings": {
           "domainNameLabel": "[concat(variables('namespace'), parameters('index'), uniqueString(resourceGroup().id, deployment().name))]"
-        }        
+        }
       },
       "zones": [
         "[variables('availabilityZone')]"
@@ -151,7 +157,7 @@
         "provider": "[toUpper(parameters('elasticTags').provider)]"
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('namespace'), parameters('index'), '-nic'))]"
+        "[concat('Microsoft.Network/networkInterfaces/', variables('namespace'), parameters('index'), '-nic')]"
       ],
       "properties": {
         "hardwareProfile": {
@@ -188,7 +194,7 @@
           "apiVersion": "2019-03-01",
           "location": "[parameters('vm').shared.location]",
           "dependsOn": [
-            "[resourceId('Microsoft.Compute/virtualMachines', concat(variables('namespace'), parameters('index')))]"
+            "[concat('Microsoft.Compute/virtualMachines/', variables('namespace'), parameters('index'))]"
           ],
           "properties": "[parameters('vm').installScript]"
         }
